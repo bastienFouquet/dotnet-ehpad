@@ -32,5 +32,7 @@ namespace Ehpad.ORM
         public int PersonTypeId { get; set; }
 
         public PersonType PersonType { get; set; }
+
+        public List<Vaccinate> Vaccinates { get; } = new List<Vaccinate>();
     }
 }
