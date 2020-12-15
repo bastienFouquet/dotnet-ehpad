@@ -14,5 +14,6 @@ namespace Ehpad.ORM
         public string Label { get; set; }
 
         public List<Person> Persons { get; } = new List<Person>();
+
     }
 }
