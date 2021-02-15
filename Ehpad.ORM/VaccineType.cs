@@ -10,6 +10,7 @@ namespace Ehpad.ORM
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Libelle")]
         [MaxLength(50)]
         public string Label { get; set; }
 

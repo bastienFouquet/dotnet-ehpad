@@ -9,23 +9,22 @@ using Ehpad.ORM;
 
 namespace Ehpad.WEB.Controllers
 {
-    public class PersonController : Controller
+    public class VaccineTypeController : Controller
     {
         private readonly Context _context;
 
-        public PersonController(Context context)
+        public VaccineTypeController(Context context)
         {
             _context = context;
         }
 
-        // GET: Person
+        // GET: VaccineType
         public async Task<IActionResult> Index()
         {
-            var context = _context.Persons.Include(p => p.PersonType).Include(v => v.Vaccinates);
-            return View(await context.ToListAsync());
+            return View(await _context.VaccineTypes.ToListAsync());
         }
 
-        // GET: Person/Details/5
+        // GET: VaccineType/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace Ehpad.WEB.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Persons
-                .Include(p => p.PersonType)
+            var vaccineType = await _context.VaccineTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (person == null)
+            if (vaccineType == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(vaccineType);
         }
 
-        // GET: Person/Create
+        // GET: VaccineType/Create
         public IActionResult Create()
         {
-            ViewData["PersonTypeId"] = new SelectList(_context.PersonTypes, "Id", "Label");
             return View();
         }
 
-        // POST: Person/Create
+        // POST: VaccineType/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Firstname,Lastname,Gender,BirthDate,PersonTypeId")] Person person)
+        public async Task<IActionResult> Create([Bind("Id,Label")] VaccineType vaccineType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(person);
+                _context.Add(vaccineType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonTypeId"] = new SelectList(_context.PersonTypes, "Id", "Label", person.PersonTypeId);
-            return View(person);
+            return View(vaccineType);
         }
 
-        // GET: Person/Edit/5
+        // GET: VaccineType/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace Ehpad.WEB.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Persons.FindAsync(id);
-            if (person == null)
+            var vaccineType = await _context.VaccineTypes.FindAsync(id);
+            if (vaccineType == null)
             {
                 return NotFound();
             }
-            ViewData["PersonTypeId"] = new SelectList(_context.PersonTypes, "Id", "Label", person.PersonTypeId);
-            return View(person);
+            return View(vaccineType);
         }
 
-        // POST: Person/Edit/5
+        // POST: VaccineType/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Firstname,Lastname,Gender,BirthDate,PersonTypeId")] Person person)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Label")] VaccineType vaccineType)
         {
-            if (id != person.Id)
+            if (id != vaccineType.Id)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace Ehpad.WEB.Controllers
             {
                 try
                 {
-                    _context.Update(person);
+                    _context.Update(vaccineType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonExists(person.Id))
+                    if (!VaccineTypeExists(vaccineType.Id))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace Ehpad.WEB.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonTypeId"] = new SelectList(_context.PersonTypes, "Id", "Label", person.PersonTypeId);
-            return View(person);
+            return View(vaccineType);
         }
 
-        // GET: Person/Delete/5
+        // GET: VaccineType/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,36 +123,30 @@ namespace Ehpad.WEB.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Persons
-                .Include(p => p.PersonType)
+            var vaccineType = await _context.VaccineTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (person == null)
+            if (vaccineType == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(vaccineType);
         }
 
-        // POST: Person/Delete/5
+        // POST: VaccineType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var person = await _context.Persons.FindAsync(id);
-            _context.Persons.Remove(person);
+            var vaccineType = await _context.VaccineTypes.FindAsync(id);
+            _context.VaccineTypes.Remove(vaccineType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Grippe()
+        private bool VaccineTypeExists(int id)
         {
-            return View();
-        }
-
-        private bool PersonExists(int id)
-        {
-            return _context.Persons.Any(e => e.Id == id);
+            return _context.VaccineTypes.Any(e => e.Id == id);
         }
     }
 }

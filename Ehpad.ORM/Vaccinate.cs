@@ -31,8 +31,10 @@ namespace Ehpad.ORM
         [Display(Name = "Vaccin")]
         public int VaccineId { get; set; }
 
+        [Display(Name = "Personne")]
         public Person Person { get; set; }
 
+        [Display(Name = "Vaccin")]
         public Vaccine Vaccine { get; set; }
     }
 }

@@ -17,6 +17,9 @@ namespace Ehpad.ORM
         [Display(Name = "Type")]
         public int VaccineTypeId { get; set; }
 
+        [Display(Name = "Type")]
+        public VaccineType VaccineType { get; set; }
+
         public List<Vaccinate> Vaccinates { get; } = new List<Vaccinate>();
     }
 }

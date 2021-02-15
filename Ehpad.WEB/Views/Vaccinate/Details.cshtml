@@ -1,4 +1,4 @@
-﻿@model Ehpad.ORM.Person
+﻿@model Ehpad.ORM.Vaccinate
 
 @{
     ViewData["Title"] = "Détails";
@@ -7,38 +7,38 @@
 <h1>Détails</h1>
 
 <div>
-    <h4>Personne</h4>
+    <h4>Injection</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Firstname)
+            @Html.DisplayNameFor(model => model.Date)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Firstname)
+            @Html.DisplayFor(model => model.Date)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lastname)
+            @Html.DisplayNameFor(model => model.RecallDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lastname)
+            @Html.DisplayFor(model => model.RecallDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DisplayNameFor(model => model.BatchNumber)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
+            @Html.DisplayFor(model => model.BatchNumber)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthDate)
+            @Html.DisplayNameFor(model => model.Person)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthDate)
+            @Html.DisplayFor(model => model.Person.Firstname)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PersonType)
+            @Html.DisplayNameFor(model => model.Vaccine)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PersonType.Label)
+            @Html.DisplayFor(model => model.Vaccine.Brand)
         </dd>
     </dl>
 </div>
