@@ -6,6 +6,6 @@ namespace Ehpad.ORM
 {
     public static class Config
     {
-        public const String DB_FILE = "ehpad.db";
+        public const string DB_FILE = "ehpad.db";
     }
 }

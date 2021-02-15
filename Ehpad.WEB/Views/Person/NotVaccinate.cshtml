@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Ehpad.ORM.Person>
+
+@{
+    ViewData["Title"] = "Liste des personnes non vaccinées";
+}
+
+<h1>Liste des personnes non vaccinées du COVID</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonType)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            //IF no COVID vaccination, show the person
+            @if (item.Vaccinates.Count(vaccinate => vaccinate.Vaccine.VaccineType.Label == "Covid") == 0)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonType.Label)
+            </td>
+            <td>
+                <a asp-controller="Vaccinate" asp-action="Person" asp-route-id="@item.Id">Injections</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editer</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Détails</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
+            }
+
+        }
+    </tbody>
+</table>
