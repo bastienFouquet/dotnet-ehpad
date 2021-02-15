@@ -2,6 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <a asp-controller="Person" asp-action="Grippe">Personnes non vacciné pour la Grippe cette année</a>
+<div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h2><a asp-controller="Person" asp-action="Grippe">Personnes non vaccinées pour la Grippe cette année</a></h2>
+        </div>
+    </div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h2><a asp-controller="Person" asp-action="NotVaccinate">Personnes non vaccinées contre la COVID</a></h2>
+        </div>
+    </div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h2><a asp-controller="Person" asp-action="Latecomers">Personnes en retard pour injection de rappel</a></h2>
+        </div>
+    </div>
 </div>

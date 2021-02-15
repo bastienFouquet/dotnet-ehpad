@@ -34,26 +34,31 @@
             //IF no COVID vaccination, show the person
             @if (item.Vaccinates.Count(vaccinate => vaccinate.Vaccine.VaccineType.Label == "Covid") == 0)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Firstname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Lastname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BirthDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PersonType.Label)
-                    </td>
-                    <td>
-                        <a asp-controller="Vaccinate" asp-action="Person" asp-route-id="@item.Id">Injections</a>
-                    </td>
-                </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonType.Label)
+            </td>
+            <td>
+                <a asp-controller="Vaccinate" asp-action="Person" asp-route-id="@item.Id">Injections</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editer</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Détails</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
             }
 
         }
