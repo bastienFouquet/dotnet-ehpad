@@ -153,7 +153,17 @@ namespace Ehpad.WEB.Controllers
 
         public async Task<IActionResult> Grippe()
         {
-            return View();
+            var dateTime = DateTime.Today;
+            var persons = await _context.Persons.Include(person => person.PersonType)
+                .Include(person => person.Vaccinates)
+                .ThenInclude(vaccinate => vaccinate.Vaccine)
+                .ThenInclude(vaccine => vaccine.VaccineType).ToListAsync();
+            var personsToDisplay = (from person in persons
+                                    where !person.Vaccinates.Any(Vaccinate => Vaccinate.Vaccine.VaccineType.Label == "Grippe")
+                                    || (person.Vaccinates.Any(Vaccinate => Vaccinate.Vaccine.VaccineType.Label == "Grippe"
+                                        && Vaccinate.RecallDate.Year < dateTime.Year))
+                                    select person).ToList();
+            return View(personsToDisplay);
         }
 
         private bool PersonExists(int id)
